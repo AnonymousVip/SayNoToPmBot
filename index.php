@@ -1,6 +1,7 @@
 <?php
 error_reporting(0);
-$tok = '1416253643:AAGTs3QWj3-evzo4QyEDB3cSDhk5VYhakKc';
+$json_file = json_decode(file_get_contents("app.json"),true);
+$tok = $json_file['env']['TOKEN']["value"];
 function botaction($method, $data){
 	global $tok;
 	global $dadel;
