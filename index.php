@@ -1,7 +1,6 @@
 <?php
 error_reporting(0);
-$json_file = json_decode(file_get_contents("app.json"),true);
-$tok = $json_file['env']['TOKEN']["value"];
+$tok = '1416253643:AAGTs3QWj3-evzo4QyEDB3cSDhk5VYhakKc';
 function botaction($method, $data){
 	global $tok;
 	global $dadel;
@@ -47,7 +46,6 @@ $typ = $update['message']['chat']['type'];
 $texts = $update['message']['text'];
 $text = strtolower($update['message']['text']);
 $fullname = ''.$fname.' '.$lname.'';
-print_r($forward_user_id = $update['message']['reply_message']);
 ##################NEW MEMBER DATA ################
 $new_member = $update['message']['new_chat_member'];
 $gname = $update['message']['chat']['title'];
@@ -112,7 +110,7 @@ if($chat_id == $owner_id)
 	if($reply_message)
 	{
 		$reply_to_user = $text;
-		botaction("sendMessage",['chat_id'=>$forward_user_id,'text'=>$reply_to_user]);
+		botaction("copyMessage",['from_chat_id'=>$owner_id,'chat_id'=>$forward_user_id,'message_id'=>$mid]);
 	}
 }
 
