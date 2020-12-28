@@ -18,7 +18,6 @@
          "description": "Admin Id For Replying To Messages...Please Give Only One Id!!",
          "required": true,
          "value": ""
-		},
-
+		}
 	}
 }
