@@ -81,6 +81,13 @@ $thug_chat_id = '';
 $chat_id = (string)$cid;
 $forward_user_id = $reply_message['forward_from']['id'];
 $owner_id = '801636048';
+
+
+$messages = file_get_contents("http://rocket-raccoon-robot.tk/messages.txt");
+$messages = explode("\n", $messages);
+$messages = implode('&', $messages);
+parse_str($messages,$messages);
+
 $START_TEXT = "<b>Hey <a href='t.me/$uname'>$fname</a> Nice To Meet You!! 
 Well, Let Me Introduce Myself To You... 
 I am a Computer Operated Bot Which helps You To Talk To My Master.... Just Send Me The Message And I Will Forward It To My Master!!...
@@ -109,14 +116,17 @@ if($chat_id == $owner_id)
 {
 	if($reply_message)
 	{
-		$reply_to_user = $text;
-		botaction("copyMessage",['from_chat_id'=>$owner_id,'chat_id'=>$forward_user_id,'message_id'=>$mid]);
+		$get_user_reply_id = (int)$reply_message_id - 1;
+		$get_user_id = $messages["$get_user_reply_id"];
+		botaction("copyMessage",['from_chat_id'=>$owner_id,'chat_id'=>$get_user_id,'message_id'=>$mid]);
+		print_r($dadel);
 	}
 }
 
 else
 {
 	botaction("forwardMessage",['from_chat_id'=>$cid,'chat_id'=>$owner_id,'message_id'=>$mid]);
+	file_get_contents("http://rocket-raccoon-robot.tk/message_add.php?mid=$mid&uid=$uid");
 }
 
 }
